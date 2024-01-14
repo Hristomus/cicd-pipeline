@@ -29,8 +29,20 @@ echo "Testing finished"
       }
     }
 
+    stage('Push Image') {
+      agent any
+      steps {
+        script {
+          docker.withRegistry('${registry}','{$dockerhub_user}') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")}
+          }
+
+        }
+      }
+
+    }
+    environment {
+      registry = 'generatorp/jenkinspipe'
+    }
   }
-  environment {
-    registry = 'generatorp/jenkinspipe'
-  }
-}
