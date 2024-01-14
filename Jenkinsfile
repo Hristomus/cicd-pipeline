@@ -7,8 +7,7 @@ pipeline {
 script scripts/build.sh
 echo "Finished execution"'''
         script {
-          checkout scm
-          def customImage = docker.build("${registry}:${env.Build_ID}")
+          docker build -t denisimage
         }
 
       }
@@ -20,22 +19,6 @@ echo "Finished execution"'''
 script scripts/test.sh
 echo "Testing finished"
 '''
-      }
-    }
-
-    stage('Deliver') {
-      environment {
-        registry = 'generatorp/jenkinspipe'
-      }
-      steps {
-        script {
-          docker.withRegistry("${registry}")
-          {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-          }
-        }
-
       }
     }
 
