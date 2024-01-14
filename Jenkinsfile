@@ -9,6 +9,7 @@ echo "Finished execution"'''
         script {
           checkout scm
           def customImage = docker.build("${registry}:${env.Build_ID}")
+          {app.push("${env.BUILD_NUMBER}")app.push("latest") }
         }
 
       }
