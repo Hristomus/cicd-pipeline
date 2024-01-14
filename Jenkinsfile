@@ -33,10 +33,11 @@ echo "Testing finished"
       agent any
       environment {
         registry = 'generatorp/jenkinspipe'
+        registryCredentials = 'dockerhub_id'
       }
       steps {
         script {
-          docker.withRegistry('https://hub.docker.com/repository/docker/generatorp/jenkinspipe/general','dockerhub_id') {
+          docker.withRegistry('https://hub.docker.com/repository/docker/generatorp/jenkinspipe/general',registryCredentials) {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")}
           }
@@ -47,5 +48,6 @@ echo "Testing finished"
     }
     environment {
       registry = 'generatorp/jenkinspipe'
+      regisrtyCredentials = 'dockerhub_id'
     }
   }
