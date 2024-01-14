@@ -24,6 +24,9 @@ echo "Testing finished"
     }
 
     stage('Deliver') {
+      environment {
+        registry = 'generatorp/jenkinspipe'
+      }
       steps {
         script {
           docker.withRegistry("${registry}")
