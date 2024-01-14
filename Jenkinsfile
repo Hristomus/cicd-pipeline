@@ -7,6 +7,8 @@ pipeline {
 script scripts/build.sh
 echo "Finished execution"'''
         script {
+          checkout scm
+
           docker build -t denisimage
         }
 
@@ -19,6 +21,17 @@ echo "Finished execution"'''
 script scripts/test.sh
 echo "Testing finished"
 '''
+      }
+    }
+
+    stage('Build Image') {
+      steps {
+        script {
+          checkout scm
+          def app
+          app = docker.build("${registry}:${env.Build_ID}")
+        }
+
       }
     }
 
