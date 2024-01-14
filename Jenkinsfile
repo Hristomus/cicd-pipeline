@@ -6,12 +6,6 @@ pipeline {
         sh '''echo "Executing shell script"
 script scripts/build.sh
 echo "Finished execution"'''
-        script {
-          checkout scm
-
-          docker build -t denisimage
-        }
-
       }
     }
 
