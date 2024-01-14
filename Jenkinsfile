@@ -33,7 +33,7 @@ echo "Testing finished"
       agent any
       steps {
         script {
-          docker.withRegistry('${registry}','{$dockerhub_user}') {
+          docker.withRegistry('${registry}',$dockerhub_user) {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")}
           }
