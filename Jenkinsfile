@@ -36,7 +36,7 @@ echo "Testing finished"
       }
       steps {
         script {
-          docker.withRegistry('${registry}', dockerhub_user) {
+          docker.withRegistry('${registry}', dockerhub_id) {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")}
           }
