@@ -9,7 +9,6 @@ echo "Finished execution"'''
         script {
           checkout scm
           def customImage = docker.build("${registry}:${env.Build_ID}")
-
         }
 
       }
@@ -21,6 +20,19 @@ echo "Finished execution"'''
 script scripts/test.sh
 echo "Testing finished"
 '''
+      }
+    }
+
+    stage('Deliver') {
+      steps {
+        script {
+          docker.withRegistry("${registry}")
+          {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+          }
+        }
+
       }
     }
 
