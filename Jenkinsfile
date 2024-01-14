@@ -37,8 +37,9 @@ echo "Testing finished"
       }
       steps {
         script {
-          docker.withRegistry('', registryCredential)
-          dockerImage.push()
+          docker.withRegistry('registry', registryCredential)
+          {app.push("${env.BUILD_NUMBER}")
+          app.push("latest")}
         }
 
       }
