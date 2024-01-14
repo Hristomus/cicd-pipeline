@@ -36,7 +36,7 @@ echo "Testing finished"
       }
       steps {
         script {
-          docker.withRegistry('${registry}','dockerhub_id') {
+          docker.withRegistry('https://hub.docker.com/repository/docker/generatorp/jenkinspipe/general','dockerhub_id') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")}
           }
